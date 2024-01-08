@@ -23,6 +23,10 @@ Servo servo1;
 Servo servo2;
 Servo servo3;
 
+bool begin_control = false;
+float angle0 = 90;
+float offset0 = 2;
+
 const char compile_date[] = __DATE__ " " __TIME__;
 
 void setup() {
@@ -34,6 +38,8 @@ void setup() {
   Serial.setTimeout(1);
 
   delay(1000);
+
+  pinMode(4, INPUT);
 
   // OLED test.
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
@@ -51,29 +57,60 @@ void setup() {
   display.display();
   delay(3000);
 }
+
 void loop()
 {
-  int x;
-  String s;
+  if(digitalRead(4) == 0){
+    begin_control = true;
+  }
+
+  if(!begin_control){
+    servo1.attach(servopin1);
+    servo2.attach(servopin2);
+    servo3.attach(servopin3);
+    servo1.write(90);
+    servo2.write(135);
+    servo3.write(55);
+    delay(20);
+
+    return;
+  }
+
+  //int x;
+  //String s;
 
   display.clearDisplay();
   display.setTextSize(2);
   display.setCursor(0, 0);
 
-  while (!Serial.available());
-  s = Serial.readString();
-  display.println(s);
-  x = atoi(s.c_str());
+  //while (!Serial.available());
+  //s = Serial.readString();
+  //display.println(s);
+  //x = atoi(s.c_str());
 
-  display.println(x);
-  display.println(x + 1);
+  //display.println(x);
+  //display.println(x + 1);
+
+  //display.println(angle0);
+  //display.println(digitalRead(pin_check));
+  
   display.display();
+
+  if(angle0 >= 95){
+    offset0 = offset0 * -1;
+  }
+
+  if(angle0 <= 85){
+    offset0 = offset0 * -1;
+  }
+
+  angle0 = angle0 + 0 * offset0;
 
   servo1.attach(servopin1);
   servo2.attach(servopin2);
   servo3.attach(servopin3);
-  servo1.write(90);
-  servo2.write(90);
-  servo3.write(90);
+  servo1.write(angle0);
+  servo2.write(135);
+  servo3.write(45);
   delay(20);
 }
