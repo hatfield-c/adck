@@ -18,7 +18,8 @@ void StateLoop() {
   ButtonCheck();
 
   if(MODE == 0){
-    PotentiometerLoop();
+    KnobLoop();
+    ServoLoop();
   } else if(MODE == 1){
 
   } else if(MODE == 2){
@@ -28,7 +29,8 @@ void StateLoop() {
   } else if(MODE == 4){
 
   } else if(MODE == 5){
-
+    UsbLoop();
+    ServoLoop();
   }
 }
 
@@ -49,7 +51,7 @@ void ButtonCheck(){
 void SetState(int state_mode){
   MODE = state_mode;
 
-  DISPLAY_MESSAGE = "[Mode]:\n";
+  DISPLAY_MESSAGE = "<Mode>:\n";
 
   if(state_mode == 0){
     DISPLAY_MESSAGE += "  Knobs";
@@ -70,4 +72,7 @@ void SetState(int state_mode){
   display.print(DISPLAY_MESSAGE);
   display.display();
   delay(1000);
+  display.print("\n\n         >");
+  display.display();
+  delay(20);
 }

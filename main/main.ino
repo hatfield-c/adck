@@ -2,11 +2,12 @@
 void setup() {
   
   ButtonSetup();
-  PotentiometerSetup();
+  ServoSetup();
   DisplaySetup();
   StateSetup();
+  UsbSetup();
 
-  delay(3000);
+  delay(50);
 }
 
 void loop() {
