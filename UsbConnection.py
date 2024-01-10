@@ -11,6 +11,8 @@ class UsbConnection:
 		if is_verbose:
 			print("\nConnecting to arduino...")
 
+		self.arduino_usb = serial.Serial(port = "COM8", baudrate = 9600, timeout = 0.1)
+
 		if is_verbose:
 			print("    Connection successful!")
 			print("    Press enter to continue.")
@@ -20,8 +22,7 @@ class UsbConnection:
 		x += "\0"
 		byte_data = bytes(x,  'utf-8')
 
-		arduino_usb = serial.Serial(port = self.port, baudrate = 9600, timeout = 0.1)
-		arduino_usb.write(byte_data)
+		self.arduino_usb.write(byte_data)
 		time.sleep(0.05)
 
 	def SetPosition(self, vector3):
