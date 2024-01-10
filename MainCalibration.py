@@ -2,14 +2,14 @@ import time
 
 import UsbConnection
 
-def Main():
+def MainCalibration():
 	action = None
 
 	port = "COM8"
 	name = "right_arm"
 	usb_connection = None
 
-	INIT = [85, 125, 72]
+	CENTER = [85, 125, 72]
 
 	FORWARD = [46, 110, 36]
 	LEFT = [77, 139, 70]
@@ -40,7 +40,7 @@ def Main():
 			break
 
 		if action == 0 and usb_connection is None:
-			usb_connection = UsbConnection.UsbConnection(port = port, name = name, init = INIT, is_verbose = True)
+			usb_connection = UsbConnection.UsbConnection(port = port, name = name, is_verbose = True)
 		elif usb_connection is not None:
 			if action == 1:
 				usb_connection.SetPosition(FORWARD)
@@ -51,7 +51,7 @@ def Main():
 			if action == 4:
 				usb_connection.SetPosition(RIGHT)
 			if action == 5:
-				usb_connection.SetPosition(INIT)
+				usb_connection.SetPosition(CENTER)
 		else:
 			print("\n[WARNING]: Must establish a connection to the arduino first.")
 
@@ -60,4 +60,4 @@ def Main():
 
 
 if __name__ == "__main__":
-	Main()
+	MainCalibration()

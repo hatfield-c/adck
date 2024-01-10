@@ -3,22 +3,18 @@ import time
 import numpy as np
 
 class UsbConnection:
-	def __init__(self, port, name, init = [90, 90, 90], is_verbose = False):
+	def __init__(self, port, name, is_verbose = False):
 		self.port = port
 		self.name = name
-		self.init = init
 		self.is_verbose = is_verbose
 
 		if is_verbose:
 			print("\nConnecting to arduino...")
 
 		self.arduino_usb = serial.Serial(port = port, baudrate = 9600)
-		self.SetPosition(self.init)
 
 		if is_verbose:
 			print("    Connection successful!")
-			print("    Press enter to continue.")
-			#input()
 
 	def WriteData(self, x):
 		x += "\0"
@@ -44,5 +40,3 @@ class UsbConnection:
 
 		if self.is_verbose:
 			print("    Position sent successfully!")
-			print("    Press enter to continue.")
-			#input()
