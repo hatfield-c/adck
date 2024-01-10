@@ -2,12 +2,13 @@
 
 Servo SERVOS[3];
 float OFFSETS[3];
-int OLD_VALS[3];
-int NEW_VALS[3];
+int CURRENT_VALS[3];
+int DESIRED_VALS[3];
 int INIT_VALS[3] = { 90, 90, 90 };
+int MAX_SERVO_DIFF = 5;
 
 void SetServo(int index, int value){
-  NEW_VALS[index] = value;
+  DESIRED_VALS[index] = value;
 }
 
 void SetServos(int values[]){
@@ -22,7 +23,7 @@ void WriteServo(int index, int value){
 
 bool IsUpdated(){
   for(int i = 0; i < 3; i++){
-    if(OLD_VALS[i] != NEW_VALS[i]){
+    if(CURRENT_VALS[i] != DESIRED_VALS[i]){
       return true;
     }
   }
@@ -45,8 +46,17 @@ void ServoLoop(){
 
   for(int i = 0; i < 3; i++){
     int servo_offset = OFFSETS[i];
-    int servo_value = NEW_VALS[i];
-    OLD_VALS[i] = servo_value;
+    int servo_value = DESIRED_VALS[i];
+    int current_value = CURRENT_VALS[i];
+
+    int servo_diff = servo_value - current_value;
+    int direction_sign = servo_diff / abs(servo_diff);
+
+    if(abs(servo_diff) > MAX_SERVO_DIFF){
+      servo_value = current_value + (direction_sign * MAX_SERVO_DIFF);
+    }
+
+    CURRENT_VALS[i] = servo_value;
 
     WriteServo(i, servo_value + servo_offset);
   }

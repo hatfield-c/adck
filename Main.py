@@ -1,39 +1,46 @@
-import serial
 import time
-import numpy as np
 
-arduino = serial.Serial(port = "COM8", baudrate = 9600, timeout = 0.1)
+import UsbConnection
 
-print("\nConnection established!")
-print("    Press enter to begin...")
-input()
+def Main():
+	action = None
 
-def write_data(x):
-	x += "\0"
-	byte_data = bytes(x,  'utf-8')
-	#byte_data = bytes([int(x)])
+	port = "COM8"
+	name = "right_arm"
+	usb_connection = None
 
-	arduino.write(byte_data)
-	#arduino.write(byte_data)
+	FORWARD = [90, 135, 45]
 
-	time.sleep(0.05)
+	while True:
+		print("\n==================================")
+		print("  Autononmous Drone Conversion Kit")
+		print("          (ADCK v0.0.1)")
+		print("       Calibration Interface")
+		print("         by Cody Hatfield")
+		print("\n==================================")
 
-	return
+		print("\nWelcome to the ADCK Calibration Interface! Please select from the following options:")
+		print("    0. Connect to Arduino")
+		print("    1. FORWARD POSITION")
+		print("    2. LEFT POSITION")
+		print("    3. BACKWARD POSITION")
+		print("    4. RIGHT POSITION")
+		print("    5. Exit ADCK Calibration Interface")
 
-thetas = np.array([90, 90, 90])
+		action = input("\n[Action]:")
+		action = int(action)
 
-print("\nSetup complete!")
-print("    Sending control signals...\n")
+		if action == 5:
+			break
 
-for i in range(30):
-	print("thetas:", thetas)
+		if action == 0 and usb_connection is None:
+			usb_connection = UsbConnection.UsbConnection(port = port, name = name, is_verbose = True)
+		elif usb_connection is not None:
+			if action == 1:
+				usb_connection.SetPosition(FORWARD)
+		else:
+			print("\n[WARNING]: Must establish a connection to the arduino first.")
 
-	theta_str = str(int(thetas[0])) + "," + str(int(thetas[1])) + "," + str(int(thetas[2])) + ","
 
-	write_data(theta_str)
-	thetas += 1
-
-	time.sleep(0.5)
-
-print("\nProgram complete!")
-print("    Exiting...")
+if __name__ == "__main__":
+	Main()

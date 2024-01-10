@@ -39,6 +39,11 @@ String UsbReadLine() {
     while(Serial.available()){
       line = Serial.readStringUntil('\0');
     }
+
+  ClearScreen();
+  display.print("CMD RCV");
+  display.display();
+  delay(20);
   }
 
   return line;
