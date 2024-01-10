@@ -9,7 +9,7 @@ def Main():
 	name = "right_arm"
 	usb_connection = None
 
-	FORWARD = [90, 135, 45]
+	FORWARD = [90, 110, 90]
 
 	while True:
 		print("\n==================================")
