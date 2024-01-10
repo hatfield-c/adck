@@ -2,10 +2,10 @@
 
 Servo SERVOS[3];
 float OFFSETS[3] = { 0, 0, 0};
-int CURRENT_VALS[3] = { 90, 90, 90 };
+int CURRENT_VALS[3] = { 80, 80, 80 };
 int DESIRED_VALS[3] = { 90, 90, 90 };
 int INIT_VALS[3] = { 90, 90, 90 };
-int MAX_SERVO_DIFF = 5;
+int MAX_SERVO_DIFF = 8;
 
 void SetServo(int index, int value){
   DESIRED_VALS[index] = value;
@@ -30,6 +30,7 @@ void ServoSetup(){
 }
 
 void ServoLoop(){
+  
   for(int i = 0; i < 3; i++){
     int servo_offset = OFFSETS[i];
     int servo_value = DESIRED_VALS[i];
@@ -43,8 +44,9 @@ void ServoLoop(){
     }
 
     servo_value = current_value + servo_diff;
-    CURRENT_VALS[i] = servo_value;
+    CURRENT_VALS[i] = servo_value;  
 
     WriteServo(i, servo_value + servo_offset);
+    delay(10);
   }
 }
