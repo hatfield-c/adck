@@ -9,15 +9,15 @@ def Main():
 	name = "right_arm"
 	usb_connection = None
 
-	FORWARD = [90, 110, 90]
+	FORWARD = [90, 45, 90]
 
 	while True:
-		print("\n==================================")
+		print("\n====================================")
 		print("  Autononmous Drone Conversion Kit")
 		print("          (ADCK v0.0.1)")
-		print("       Calibration Interface")
+		print("       Calibration Interface\n")
 		print("         by Cody Hatfield")
-		print("\n==================================")
+		print("====================================")
 
 		print("\nWelcome to the ADCK Calibration Interface! Please select from the following options:")
 		print("    0. Connect to Arduino")
