@@ -43,15 +43,15 @@ def MainCalibration():
 			usb_connection = UsbConnection.UsbConnection(port = port, name = name, is_verbose = True)
 		elif usb_connection is not None:
 			if action == 1:
-				usb_connection.SetPosition(FORWARD)
+				usb_connection.SendAngles(FORWARD)
 			if action == 2:
-				usb_connection.SetPosition(LEFT)
+				usb_connection.SendAngles(LEFT)
 			if action == 3:
-				usb_connection.SetPosition(BACKWARD)
+				usb_connection.SendAngles(BACKWARD)
 			if action == 4:
-				usb_connection.SetPosition(RIGHT)
+				usb_connection.SendAngles(RIGHT)
 			if action == 5:
-				usb_connection.SetPosition(CENTER)
+				usb_connection.SendAngles(CENTER)
 		else:
 			print("\n[WARNING]: Must establish a connection to the arduino first.")
 
