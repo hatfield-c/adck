@@ -5,7 +5,7 @@ float OFFSETS[3] = { 0, 0, 0};
 int CURRENT_VALS[3] = { 80, 80, 80 };
 int DESIRED_VALS[3] = { 90, 90, 90 };
 int INIT_VALS[3] = { 90, 90, 90 };
-int MAX_SERVO_DIFF = 20;
+int MAX_SERVO_DIFF = 10;
 
 int SERVO_INDEX = 0;
 
