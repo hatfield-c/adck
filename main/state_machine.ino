@@ -21,9 +21,10 @@ void StateLoop() {
     ServoLoop();
   }
 
+  
   ClearScreen();
   display.print(DISPLAY_MESSAGE);
-  String OUT_MSG = "\n" + String(CURRENT_VALS[0]) + " " + String(CURRENT_VALS[1]) + " " + String(CURRENT_VALS[2]) + " " + String(CURRENT_VALS[3]);
+  String OUT_MSG = "\n" + String(CURRENT_VALS[0]) + " " + String(CURRENT_VALS[1]) + " " + String(CURRENT_VALS[2]);
   display.print(OUT_MSG);
   display.display();
   delay(20);

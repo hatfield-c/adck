@@ -4,7 +4,7 @@ void UsbSetup() {
 }
 
 void UsbLoop() {
-  int position[4];
+  int position[3];
 
   UsbGetPosition(position);
 
@@ -26,12 +26,10 @@ void UsbGetPosition(int position[]){
   char* theta0 = strtok(raw_string.c_str(), ",");
   char* theta1 = strtok(NULL, ",");
   char* theta2 = strtok(NULL, ",");
-  char* theta3 = strtok(NULL, ",");
 
   position[0] = atoi(theta0);
   position[1] = atoi(theta1);
   position[2] = atoi(theta2);
-  position[3] = atoi(theta3);
 }
 
 String UsbReadLine() {
