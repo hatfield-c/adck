@@ -4,7 +4,7 @@ int KNOB_HIGH = 1023;
 int ANGLE_LOW = 0;
 int ANGLE_HIGH = 180;
 
-int KNOB_ANGLES[3];
+int KNOB_ANGLES[4];
 
 int GetKnobAngle(int index){
   int knob_value = analogRead(index);
@@ -20,7 +20,7 @@ int GetKnobAngle(int index){
 }
 
 void KnobLoop(){
-  for(int i = 0; i < 3; i++){
+  for(int i = 0; i < 4; i++){
     KNOB_ANGLES[i] = GetKnobAngle(i);
   }
 

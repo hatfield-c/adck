@@ -1,10 +1,10 @@
 #include <Servo.h>
 
-Servo SERVOS[3];
-float OFFSETS[3] = { 0, 0, 0};
-int CURRENT_VALS[3] = { 90, 90, 90 };
-int DESIRED_VALS[3] = { 80, 80, 80 };
-int INIT_VALS[3] = { 80, 80, 80 };
+Servo SERVOS[4];
+float OFFSETS[4] = { 0, 0, 0, 0 };
+int CURRENT_VALS[4] = { 90, 90, 90, 95 };
+int DESIRED_VALS[4] = { 80, 80, 80, 90 };
+int INIT_VALS[4] = { 80, 80, 80, 90 };
 int MAX_SERVO_DIFF = 10;
 
 int SERVO_INDEX = 0;
@@ -17,7 +17,7 @@ void SetServo(int index, int value){
 }
 
 void SetServos(int values[]){
-  for(int i = 0; i < 3; i++){
+  for(int i = 0; i < 4; i++){
     SetServo(i, values[i]);
   }
 }
@@ -30,6 +30,7 @@ void ServoSetup(){
   SERVOS[0].attach(9);
   SERVOS[1].attach(3);
   SERVOS[2].attach(10);
+  SERVOS[3].attach(5);
   
   SetServos(INIT_VALS);
 }
@@ -45,7 +46,7 @@ void ServoLoop(){
 
   START_TIME = end_time;
 
-  for(int i = 0; i < 3; i++){
+  for(int i = 0; i < 4; i++){
     int servo_offset = OFFSETS[i];
     int servo_value = DESIRED_VALS[i];
     int current_value = CURRENT_VALS[i];
